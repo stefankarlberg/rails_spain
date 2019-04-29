@@ -7,9 +7,96 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+      
+    <style>
+    
+      input {
+      overflow: visible;
+      border: 1px solid #b3afaf;
+      padding: 8px;
+      font-size: 19px;
+      width: 500px;
+      }
+
+      .field {
+        padding-top: 17px;
+      }
+
+      textarea {
+      border: 1px solid #b3afaf;
+      padding: 8px;
+      font-size: 13px;
+      width: 500px;
+      }
+
+      [type=submit] {
+      -webkit-appearance: button;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      background-color: #ffb203;
+      border:0px;
+      color: white;
+      font-size: 17px;
+      width: 130px;
+      }
+
+      .navbar-text{
+      text-align:right;
+      }
+
+    </style>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-grey p-4">
+
+       <p class="navbar-text pull-right">
+      <% if user_signed_in? %>
+      Logged in as <strong><%= current_user.email %></strong>.
+      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+      <% else %>
+      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+      <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+      <% end %>
+      </p>
+
+      <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+
+   
+
+
+
+
+      <div class="w-full bg-grey h-screen">
+      
+        <div class="flex mb-4">
+          <div class="container ml-auto mr-auto p-4">
+           <ul class="list-reset flex">
+              <li class="-mb-px mr-1 bg-white inline-block py-2 px-4 text-blue hover:text-blue-darker font-semibold">
+                <%= link_to 'Home', root_path, :method => "get", id: "articles_index" %>
+             </li>
+              <li class="mr-1 bg-white inline-block py-2 px-4 text-blue hover:text-blue-darker font-semibold">
+                <%= link_to 'New article', new_article_path, :method => "get", id: "new_article" %>
+              </li>
+              <li class="mr-1 bg-white inline-block py-2 px-4 text-blue hover:text-blue-darker font-semibold">
+                <%= link_to 'Show articles', articles_path, :method => "get", id: "new_article" %>
+             </li>
+            </ul>
+            <div class="bg-white p-8">
+          <%= yield %>
+          </div>
+         </div>
+        </div>
+      </div>
+
+      
+ 
   </body>
+
 </html>
