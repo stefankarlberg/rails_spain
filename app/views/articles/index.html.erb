@@ -3,10 +3,14 @@
   <p class="mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend sagittis nibh, in rhoncus eros pharetra nec. Nam ullamcorper id est vitae blandit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
 
 
-  <% @articles.each do |article| %>
-  <h2 class="mt-8"><%= article.title %></h2>
-  <%= article.content %></p>
-<% end %>
+
+<div class="post-preview">
+   <% @articles.each do |article|%>
+     <h2 class="post-title no-underline mt-4"><%= link_to article.title, article_path(article) %></h2>                    
+     <%= truncate article.content, length: 160 %>
+     <hr>
+   <% end %>    
+</div>
 
 
 
